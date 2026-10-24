@@ -1,1 +1,2 @@
-main.o: ../main.cpp
+main.o: ../main.cpp ../pbma.h
+../pbma.h:

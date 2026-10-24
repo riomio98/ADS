@@ -25,7 +25,7 @@ void rm_dublicates(vector<int>& v)
 		}
 		i++;
 	}
-	v.resize(idx);
+	v.resize(idx+1);
 
 }
 

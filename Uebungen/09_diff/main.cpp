@@ -15,8 +15,12 @@ bool diff_search(const vector<int>& x, int d)
 	size_t i = 0;
 	size_t j = 1;
 
-	while(i < j)
+	while(j < x.size())
 	{
+		if(i == j)
+		{
+			j++;
+		}
 		int diff = x[j] - x[i];
 		if(diff == d)
 		{

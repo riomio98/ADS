@@ -1,0 +1,1 @@
+kleinste.o: ../kleinste.cpp

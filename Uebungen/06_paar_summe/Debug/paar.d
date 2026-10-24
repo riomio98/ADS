@@ -1,0 +1,1 @@
+paar.o: ../paar.cpp

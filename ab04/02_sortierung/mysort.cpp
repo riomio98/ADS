@@ -28,7 +28,6 @@
  	for(size_t i = 0; i < numbers.size(); i++)
  	{
  		zahl = numbers[i];
- 		//todo forr negative numbers
  		counter[zahl-min]++;
  	}
  	int anz;

@@ -19,8 +19,8 @@ using namespace std;
 int main()
 {
 
-		int min = -6;
-		int max = 6;
+		int min = 0;
+		int max = 100;
 		int n = 30;
 		int fe1, fe2;
 		vector<int> a = create_randints(n,min,max);

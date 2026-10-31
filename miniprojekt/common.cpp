@@ -8,6 +8,8 @@
 #include "common.h"
 #include <vector>
 #include <cmath>
+#include <stdexcept>
+#include <format>
 
 
 
@@ -16,6 +18,16 @@ long zeilenkosten(int zb, int b) // pow((zeilenbreite - b),2)
 {
 	return (b - zb) * (b - zb);
 	//kosten für einzelne Zeile!
+}
+// zeilenbreite zb
+int zeilenbreite(std::vector<std::string> text, int b)
+{
+	int sum = 0;
+	for(size_t i = 0; i < text.size(); i++)
+	{
+
+
+	}
 }
 //Umbruch des textes
 std::vector<int> umbruch(std::vector<std::string> text, int b)
@@ -35,6 +47,10 @@ std::vector<int> umbruch(std::vector<std::string> text, int b)
 	{
 
 		int word_len = text[i].size();
+		if(word_len > b)
+		{
+			throw std::runtime_error(text[i] + "ist zu Gross");
+		}
 
 		if(actual == 0)
 		{
@@ -53,5 +69,6 @@ std::vector<int> umbruch(std::vector<std::string> text, int b)
 	return zeilen;
 }
 //gesamtkosten
+
 
 

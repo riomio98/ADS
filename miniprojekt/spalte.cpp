@@ -36,11 +36,13 @@ int main(int argc, char* argv[])
 	b = 10;
 
 	vector<string> test = {"ich", "bin", "ein", "student"};
-	vector<int> zahlen = umbruch(test, b);
-	for(size_t i = 0; i < zahlen.size(); i++)
+	vector<int> zeilen = umbruch(test, b);
+	for(size_t i = 0; i < zeilen.size(); i++)
 	{
-		cout << zahlen[i] << endl;
+		cout << zeilen[i] << endl;
 	}
+
+	cout << zeilenbreite(text, b);
 
 
 

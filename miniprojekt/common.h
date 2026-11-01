@@ -9,7 +9,16 @@
 #define COMMON_H_
 
 long zeilenkosten(int zb, int b);
-int zeilenbreite(std::vector<std::string> text, int b);
-std::vector<int> umbruch(std::vector<std::string> text, int b);
+
+int zeilenbreite(const std::vector<std::string>& text, int start, int ende);
+
+std::vector<int> umbruch(std::vector<std::string>& text, int b);
+
+long gesamtkosten(const std::vector<std::string>& text,
+		const std::vector<int>& zeilen, int b);
+
+void print_umbruch(const std::vector<std::string>& text,
+		const std::vector<int>& zeilen, long& cost, bool& format_cost, int& b);
+
 
 #endif /* COMMON_H_ */

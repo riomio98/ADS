@@ -20,17 +20,23 @@ long zeilenkosten(int zb, int b) // pow((zeilenbreite - b),2)
 	//kosten für einzelne Zeile!
 }
 // zeilenbreite zb
-int zeilenbreite(std::vector<std::string> text, int b)
+int zeilenbreite(const std::vector<std::string>& text, int start, int ende)
 {
-	int sum = 0;
-	for(size_t i = 0; i < text.size(); i++)
+	int zb = 0;
+	for(int i = start; i < ende; i++)
 	{
-
-
+		if(i == start)
+		{
+			zb += text[i].size(); // erstes Wort kein leerzeichen
+		}
+		else{
+			zb += text[i].size() + 1; // + leerzeichen
+		}
 	}
+	return zb;
 }
 //Umbruch des textes
-std::vector<int> umbruch(std::vector<std::string> text, int b)
+std::vector<int> umbruch(std::vector<std::string>& text, int b)
 {
 	std::vector<int> zeilen;
 
@@ -41,7 +47,7 @@ std::vector<int> umbruch(std::vector<std::string> text, int b)
 
 	zeilen.push_back(0);
 
-	int actual = 0;
+	int actual_len = 0;
 
 	for(size_t i = 0; i < text.size(); i++)
 	{
@@ -49,26 +55,87 @@ std::vector<int> umbruch(std::vector<std::string> text, int b)
 		int word_len = text[i].size();
 		if(word_len > b)
 		{
-			throw std::runtime_error(text[i] + "ist zu Gross");
+			throw std::runtime_error("Wort: "
+					+ text[i] + "ist zu Gross");
 		}
 
-		if(actual == 0)
+		if(actual_len == 0)
 		{
-			actual = word_len;
+			actual_len = word_len;
 		}
-		else if((word_len + 1) + actual  <= b)
+		else if((word_len + 1) + actual_len  <= b)
 		{
-			actual += word_len + 1;
+			actual_len += word_len + 1;
 		}
 		else
 		{
 			zeilen.push_back(i);
-			actual = word_len;
+			actual_len = word_len;
 		}
 	}
 	return zeilen;
 }
 //gesamtkosten
+long gesamtkosten(const std::vector<std::string>& text,
+		const std::vector<int>& zeilen, int b)
+{
+	long sum_cost = 0;
+	for(size_t i = 1; i < zeilen.size();i++)
+	{
+		//if(i == zeilen.size()-1)
+		//{
+		//	sum_cost += 0; //letzte zeile kostet nichts
+		//}
+		int zb = zeilenbreite(text,zeilen[i-1], zeilen[i]);
+		sum_cost += zeilenkosten(zb, b);
+	}
+	return sum_cost;
+}
 
+//Ausgabe
+void print_umbruch(const std::vector<std::string>& text,
+		const std::vector<int>& zeilen, long& cost, bool& format_cost, int& b)
+{
+	for(size_t i = 0; i < zeilen.size(); i++)
+	{
+		size_t start = zeilen[i];
+		size_t ende;
+		if(i == zeilen.size()-1)
+		{
+			ende = text.size();
+		}
+		else
+		{
+			ende = zeilen[i+1];
+		}
+		if(format_cost)
+		{
+			if(i == zeilen.size()-1)
+			{
+				std::cout << format(0,5) << " ";
+			}
+			else
+			{
+				int zb = zeilenbreite(text,start, ende);
+				std::cout << format(zeilenkosten(zb,b),5) << " ";
+			}
+		}
+		for(size_t j = start; j < ende; j++)
+		{
+
+			if(j < ende-1)
+			{
+				std::cout << text[j] << " ";
+			}
+
+			else
+			{
+				std::cout << text[j];
+			}
+		}
+		std::cout << std::endl;
+	}
+	std::cout << "Zeilen: " << zeilen.size() << ", Kosten: " << cost << std::endl;
+}
 
 

@@ -18,31 +18,21 @@ int main(int argc, char* argv[])
 
 	string file_name = args.pos(0, "beispiel.txt");
 	vector<string> text = read_words(file_name);
-	// size prüfen ?
 
 	int b = 40;
-	bool set_b = args.flag("w");
-	bool set_cost = args.flag("z");
+	bool format_cost = args.flag("z");
 
 	if(args.has_option("w"))
 	{
 		b = args.int_option("w");
 	}
 
-	if(set_cost)
-	{
-		//todo add format
-	}
-	b = 10;
 
-	vector<string> test = {"ich", "bin", "ein", "student"};
-	vector<int> zeilen = umbruch(test, b);
-	for(size_t i = 0; i < zeilen.size(); i++)
-	{
-		cout << zeilen[i] << endl;
-	}
 
-	cout << zeilenbreite(text, b);
+	vector<int> zeilen = umbruch(text, b);
+	long cost = gesamtkosten(text, zeilen, b);
+	print_umbruch(text, zeilen, cost, format_cost, b);
+
 
 
 

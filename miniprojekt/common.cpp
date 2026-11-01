@@ -7,7 +7,6 @@
 #include "pbma.h"
 #include "common.h"
 #include <vector>
-#include <cmath>
 #include <stdexcept>
 #include <format>
 
@@ -84,10 +83,7 @@ long gesamtkosten(const std::vector<std::string>& text,
 	long sum_cost = 0;
 	for(size_t i = 1; i < zeilen.size();i++)
 	{
-		//if(i == zeilen.size()-1)
-		//{
-		//	sum_cost += 0; //letzte zeile kostet nichts
-		//}
+		// bis vorletzte Zeile
 		int zb = zeilenbreite(text,zeilen[i-1], zeilen[i]);
 		sum_cost += zeilenkosten(zb, b);
 	}
@@ -110,13 +106,13 @@ void print_umbruch(const std::vector<std::string>& text,
 		{
 			ende = zeilen[i+1];
 		}
-		if(format_cost)
+		if(format_cost) // flag -z
 		{
-			if(i == zeilen.size()-1)
+			if(i == zeilen.size()-1) // letzte zeile
 			{
 				std::cout << format(0,5) << " ";
 			}
-			else
+			else //sonstige zeilen
 			{
 				int zb = zeilenbreite(text,start, ende);
 				std::cout << format(zeilenkosten(zb,b),5) << " ";

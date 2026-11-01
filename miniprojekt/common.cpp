@@ -92,7 +92,7 @@ long gesamtkosten(const std::vector<std::string>& text,
 
 //Ausgabe
 void print_umbruch(const std::vector<std::string>& text,
-		const std::vector<int>& zeilen, long& cost, bool& format_cost, int& b)
+		const std::vector<int>& zeilen, long& cost, bool format_cost, int b)
 {
 	for(size_t i = 0; i < zeilen.size(); i++)
 	{

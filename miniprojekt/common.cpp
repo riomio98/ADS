@@ -16,8 +16,10 @@
 //kosten pro zeile
 long zeilenkosten(int zb, int b) // pow((zeilenbreite - b),2)
 {
-	return (b - zb) * (b - zb);
-	//kosten für einzelne Zeile!
+	long diff = (b - zb);
+
+	return diff * diff;
+	//kosten für einzelne Zeile in long!
 }
 // zeilenbreite zb
 int zeilenbreite(const std::vector<std::string>& text, int start, int ende)

@@ -34,7 +34,19 @@ int naive_sort(vector<int>& v)
 	}
 	return max_sum;
 }
-
+int max_case3(int l,int r, int sum_max)
+{
+	 int max = l;
+	 if(r > max)
+	 {
+		 max = r;
+	 }
+	 if(sum_max > max)
+	 {
+		 max = sum_max;
+	 }
+	 return max;
+}
 
 int optim_sum(vector<int>& v)
 {
@@ -57,46 +69,45 @@ int optim_sum(vector<int>& v)
 
 int rec_optim(vector<int>& v,int li,int re)
 {
-	int m = li + (re-li)/2;
+	int mi = li + (re-li)/2;
 	if(li == re)
 	{
 		return v[li];
 	}
-	int left = rec_optim(v, li, m);
-	int right = rec_optim(v, m+1, re);
+	int l = rec_optim(v, li, mi);
+	int r = rec_optim(v, mi+1, re);
 
 	int sum = 0;
-	int best_left;
-	for(size_t i = li; i < m; i++)
+	int max_l = v[mi];
+	for(int  i = mi; i > li; i--)
 	{
 		sum += v[i];
-		if(sum > best_left)
+		if(sum > max_l)
 		{
-			best_left = sum;
+			max_l = sum;
 		}
 	}
+
 	sum = 0;
-	int best_right;
-	for(size_t i = m+1; i < re; i++)
+	int max_r = v[mi+1];
+	for(int  i = mi+1; i < re; i++)
 	{
 		sum += v[i];
-		if(sum > best_right)
+		if(sum > max_r)
 		{
-			best_right = sum;
+			max_r = sum;
 		}
 	}
-	if(best_left > best_right)
-	{
-		rec_optim(v,)
-	}
- return best;
+	return max_case3(l,r, max_l + max_r);
 }
+
+
 
 
 int main(int argc, char* argv[])
 {
 	args_t args(argc, argv);
-	string fname = args.pos(0,"maxsub.dat");
+	string fname = args.pos(0,"maxsubsimple.dat");
 
 	vector<int> v = read_ints(fname);
 
@@ -105,19 +116,19 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	//Timer timer1;
-	//cout << naive_sort(v) << endl;
-	//cout << timer1.human_measure() << endl;
-	//Timer timer2;
-	//cout << optim_sum(v) << endl;
-	//cout << timer2.human_measure() << endl;
+//	Timer timer1;
+//	cout << naive_sort(v) << endl;
+//	cout << timer1.human_measure() << endl;
 
+	Timer timer2;
+	cout << optim_sum(v) << endl;
+	cout << timer2.human_measure() << endl;
 
-	vector<int> b = {-1,3,-3,3,-6, 15};
 	int li = 0;
-	int re = b.size();
+	int re = v.size();
 	Timer timer3;
-	rec_optim(b,li,re);
+	cout << rec_optim(v,li,re) << endl;
+	cout << timer3.human_measure() << endl;
 
 
 

@@ -13,7 +13,7 @@
 
 using namespace std;
 
-int naive_sort(vector<int>& v)
+int naive_sum(vector<int>& v)
 {
 	int max_sum = v[0] + v[1];
 	for(size_t i = 0; i < v.size(); i++)
@@ -107,7 +107,7 @@ int rec_optim(vector<int>& v,int li,int re)
 int main(int argc, char* argv[])
 {
 	args_t args(argc, argv);
-	string fname = args.pos(0,"maxsubsimple.dat");
+	string fname = args.pos(0,"maxsubverylarge.dat");
 
 	vector<int> v = read_ints(fname);
 
@@ -117,7 +117,7 @@ int main(int argc, char* argv[])
 	}
 
 //	Timer timer1;
-//	cout << naive_sort(v) << endl;
+//	cout << naive_sum(v) << endl;
 //	cout << timer1.human_measure() << endl;
 
 	Timer timer2;

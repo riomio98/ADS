@@ -8,6 +8,9 @@
 #ifndef COMMON_H_
 #define COMMON_H_
 
+#include <string>
+#include <vector>
+
 long zeilenkosten(int zb, int b);
 
 int zeilenbreite(const std::vector<std::string>& text, int start, int ende);

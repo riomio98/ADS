@@ -25,7 +25,12 @@ int main(int argc, char* argv[])
 	if(args.has_option("w"))
 	{
 		b = args.int_option("w");
+		if (b <= 0)
+		{
+		    throw runtime_error("Spaltenbreite muss positiv sein");
+		}
 	}
+
 
 
 

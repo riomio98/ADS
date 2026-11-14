@@ -71,8 +71,6 @@ void bubble_down(vector<int>& vec, vector<int>& heap)
 				break;
 			}
 		}
-
-
 		j++;
 	}
 }

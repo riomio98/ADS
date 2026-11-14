@@ -20,7 +20,7 @@ int main(int argc, const char* argv[])
 {
 	args_t args(argc, argv);
 
-	size_t N = args.int_option("n",8);
+	size_t N = args.int_option("n",16);
 	bool solutions = args.flag("a");
 	display = args.flag("p");
 

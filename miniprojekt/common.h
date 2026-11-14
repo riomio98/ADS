@@ -23,5 +23,10 @@ long gesamtkosten(const std::vector<std::string>& text,
 void print_umbruch(const std::vector<std::string>& text,
 		const std::vector<int>& zeilen, long& cost, bool format_cost, int b);
 
+void umbruch_rek(std::vector<std::string>& text,
+		size_t idx, int cap, int b, std::vector<int>& zeilen);
+
+std::vector<int> umbruch_rek(std::vector<std::string>& text, int b);
+
 
 #endif /* COMMON_H_ */

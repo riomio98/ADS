@@ -50,7 +50,7 @@ bool solve_ndamen(std::vector<int>& v, int row)
 			{
 				board->setSquare(row, col, Gruen);
 				board->render();
-				schlafe_ms(30);
+				schlafe_ms(60);
 
 			}
 
@@ -63,7 +63,7 @@ bool solve_ndamen(std::vector<int>& v, int row)
 			{
 				board->resetSquare(row, col);
 				board->render();
-				schlafe_ms(30);
+				schlafe_ms(60);
 			}
 
 		}

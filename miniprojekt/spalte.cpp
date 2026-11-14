@@ -34,11 +34,16 @@ int main(int argc, char* argv[])
 
 
 
-	vector<int> zeilen = umbruch(text, b);
+	vector<int> zeilen = umbruch_rek(text, b);
 	long cost = gesamtkosten(text, zeilen, b);
 	print_umbruch(text, zeilen, cost, format_cost, b);
 
 
+	vector<int> iterativ = umbruch(text, b);
+	vector<int> rekursiv = umbruch_rek(text, b);
+
+	cout << "Gleiches Ergebnis: "
+	     << (iterativ == rekursiv) << endl;
 
 
 	return 0;

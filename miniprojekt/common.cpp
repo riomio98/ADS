@@ -36,6 +36,60 @@ int zeilenbreite(const std::vector<std::string>& text, int start, int ende)
 	}
 	return zb;
 }
+
+void umbruch_rek(std::vector<std::string>& text,
+		size_t idx, int cap, int b, std::vector<int>& zeilen)
+{
+	if(idx == text.size())
+	{
+		return;
+	}
+	int word_len = text[idx].size();
+	if(word_len > b)
+	{
+		throw std::runtime_error("Wort: "
+				+ text[idx] + "ist zu Gross");
+	}
+	if(cap == b)
+	{
+		if(word_len <= cap)
+		{
+			cap-= word_len;
+			umbruch_rek(text, idx+1, cap, b, zeilen);
+		}
+	}
+	else if(cap < b)
+	{
+		if(word_len + 1 <= cap)
+		{
+			cap-= word_len + 1;
+			umbruch_rek(text, idx+1, cap, b, zeilen);
+		}
+		else
+		{
+			zeilen.push_back(idx);
+			cap = b;
+			umbruch_rek(text, idx, cap, b, zeilen);
+		}
+	}
+}
+
+std::vector<int> umbruch_rek(std::vector<std::string>& text, int b)
+{
+	std::vector<int> zeilen;
+
+    if(text.empty())
+    {
+        return zeilen;
+    }
+    zeilen.push_back(0);
+    size_t idx = 0;
+    int cap = b;
+	umbruch_rek(text, idx, cap, b, zeilen);
+
+    return zeilen;
+}
+
 //Umbruch des textes
 std::vector<int> umbruch(std::vector<std::string>& text, int b)
 {

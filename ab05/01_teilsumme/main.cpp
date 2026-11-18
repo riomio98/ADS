@@ -79,7 +79,7 @@ int rec_optim(vector<int>& v,int li,int re)
 
 	int sum = 0;
 	int max_l = v[mi];
-	for(int  i = mi; i > li; i--)
+	for(int  i = mi; i >= li; i--)
 	{
 		sum += v[i];
 		if(sum > max_l)
@@ -90,7 +90,7 @@ int rec_optim(vector<int>& v,int li,int re)
 
 	sum = 0;
 	int max_r = v[mi+1];
-	for(int  i = mi+1; i < re; i++)
+	for(int  i = mi+1; i <= re; i++)
 	{
 		sum += v[i];
 		if(sum > max_r)

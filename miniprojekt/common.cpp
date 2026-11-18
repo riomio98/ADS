@@ -20,18 +20,29 @@ long zeilenkosten(int zb, int b) // pow((zeilenbreite - b),2)
 	return diff * diff;
 	//kosten für einzelne Zeile in long!
 }
+
+
+
+
+
 // zeilenbreite zb
-int zeilenbreite(const std::vector<std::string>& text, int start, int ende)
+int zeilenbreite(
+    const std::vector<std::string>& text,
+    int start,
+    int ende
+)
 {
 	int zb = 0;
-	for(int i = start; i < ende; i++)
+	for(size_t i = start; i < ende; i++)
 	{
-		if(i == start)
+		int actual_word = text[i].size();
+		if(start == i)
 		{
-			zb += text[i].size(); // erstes Wort kein leerzeichen
+			zb+= actual_word;
 		}
-		else{
-			zb += text[i].size() + 1; // + leerzeichen
+		else
+		{
+			zb+= actual_word + 1;
 		}
 	}
 	return zb;
@@ -131,18 +142,50 @@ std::vector<int> umbruch(std::vector<std::string>& text, int b)
 	return zeilen;
 }
 //gesamtkosten
-long gesamtkosten(const std::vector<std::string>& text,
-		const std::vector<int>& zeilen, int b)
+long gesamtkosten(
+    const std::vector<std::string>& text,
+    const std::vector<int>& zeilen,
+    int b
+)
 {
-	long sum_cost = 0;
-	for(size_t i = 1; i < zeilen.size();i++)
+	long ges = 0;
+	for(size_t i = 0; i < zeilen.size()-1; i++)
 	{
-		// bis vorletzte Zeile
-		int zb = zeilenbreite(text,zeilen[i-1], zeilen[i]);
-		sum_cost += zeilenkosten(zb, b);
+		int zb = zeilenbreite(text, zeilen[i], zeilen[i+1]);
+		long cost = zeilenkosten(zb, b);
+		ges+= cost;
 	}
-	return sum_cost;
+
+
+	return ges;
+
 }
+
+
+long gesamtkosten_rek(
+    const std::vector<std::string>& text,
+    const std::vector<int>& zeilen,
+    int b,
+    size_t i
+)
+{
+	if (zeilen.empty())
+	{
+	    return 0;
+	}
+	if (i >= zeilen.size()-1)
+	{
+	    return 0;
+	}
+
+	int zb = zeilenbreite(text, zeilen[i], zeilen[i+1]);
+	long cost = zeilenkosten(zb, b);
+	return cost + gesamtkosten_rek(text, zeilen,b,i+1);
+
+}
+
+
+
 
 //Ausgabe
 void print_umbruch(const std::vector<std::string>& text,

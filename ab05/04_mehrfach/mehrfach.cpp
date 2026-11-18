@@ -44,8 +44,8 @@ BigInt power_a_endrec(BigInt n, int p, BigInt acc)
 		return acc;
 	}
 
-
-	return power_a_endrec(n, p-1, acc *n);
+	acc *= n;
+	return power_a_endrec(n, p-1, acc);
 }
 
 BigInt power_b(BigInt n, int p)

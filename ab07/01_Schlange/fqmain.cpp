@@ -13,108 +13,38 @@
 
 using namespace std;
 
+int abzaehlreim(size_t n, int k)
+{
+	Queue q;
+	init(q, n);
+
+	for(size_t i = 0; i < n; i++)
+	{
+		enter(q, i);
+	}
+
+
+	while(n > 1)
+	{
+		for(int i = 0; i < k-1; i++)
+		{
+			int actual_kid = front(q);
+			leave(q);
+			enter(q, actual_kid);
+		}
+		leave(q);
+		n--;
+	}
+	return front(q);
+}
+
 int main()
 {
-    Queue q;
-    init(q, 4);
 
+	size_t n = 10;
+	int k = 2;
 
-    cout << "Test 1: Einfuegen" << endl;
-
-    assert(empty(q));
-
-    enter(q, 10);
-    enter(q, 20);
-    enter(q, 30);
-    enter(q, 40);
-
-    assert(full(q));
-    assert(front(q) == 10);
-
-    cout << "OK" << endl;
-
-
-
-    cout << "Test 2: Vergroessern" << endl;
-
-    enter(q, 50);
-
-    assert(q.cap == 8);
-    assert(front(q) == 10);
-
-    cout << "OK" << endl;
-
-
-
-    cout << "Test 3: FIFO" << endl;
-
-    for(int x : {10, 20, 30, 40, 50})
-    {
-        assert(front(q) == x);
-        leave(q);
-    }
-
-    assert(empty(q));
-
-    cout << "OK" << endl;
-
-    clear(q);
-
-
-
-    cout << "Test 4: Umlauf" << endl;
-
-    init(q, 4);
-
-    enter(q, 10);
-    enter(q, 20);
-    enter(q, 30);
-    enter(q, 40);
-
-    leave(q);
-    leave(q);
-
-    enter(q, 50);
-    enter(q, 60);
-
-    assert(full(q));
-    assert(front(q) == 30);
-
-    cout << "OK" << endl;
-
-
-
-    cout << "Test 5: Vergroessern nach Umlauf" << endl;
-
-    enter(q, 70);
-
-    for(int x : {30, 40, 50, 60, 70})
-    {
-        assert(front(q) == x);
-        leave(q);
-    }
-
-    assert(empty(q));
-
-    cout << "OK" << endl;
-
-
-
-    cout << "Test 6: Wiederverwenden" << endl;
-
-    enter(q, 99);
-
-    assert(front(q) == 99);
-
-    leave(q);
-
-    assert(empty(q));
-
-    cout << "OK" << endl;
-
-    clear(q);
-
-    cout << "\nALLE TESTS BESTANDEN!" << endl;
+	cout << "gewinner: " <<  abzaehlreim(n,k) << endl;;
 
     return 0;
 }

@@ -248,14 +248,14 @@ public:
 
     /** Greife auf Option key=value zu, Ausnahme bei nicht gesetztem key
      * @param key gesetzter Schlüssel
-     * @return value von Optione key=value
+     * @return value von Option key=value
      */
     std::string option(const std::string& key) const;
 
     /** Greife auf Option key=value zu, Default-Wert bei nicht gesetztem key
      * @param key gesetzter Schlüssel
      * @param defval Vorgabewert falls Schlüssel nicht gesetzt ist
-     * @return value von Optione key=value
+     * @return value von Option key=value
      */
     std::string option(const std::string& key, const std::string& defval) const;
 
@@ -510,12 +510,12 @@ public:
 };
 
 /** Schlafe ein paar Millisekunden
- * @param ms wieviele Millisekunden schlafen
+ * @param ms wie viele Millisekunden schlafen
  */
 void schlafe_ms(int ms);
 
 /** Schlafe ein paar Mikrosekunden
- * @param us wieviele Mikrosekunden schlafen
+ * @param us wie viele Mikrosekunden schlafen
  */
 void schlafe_us(int us);
 
@@ -653,7 +653,7 @@ public:
      */
     BigInt& operator/=(const BigInt& other);
 
-    /** Ganzzahlige Modulo-Operation, das Ergebis ist wie bei Python
+    /** Ganzzahlige Modulo-Operation, das Ergebnis ist wie bei Python
         positivem Modulus immer > 0 und bei negativem Modulus
         immer < 0, falls der Wert nicht 0 ist
      * @param bi ganzzahliger Modulus
@@ -712,19 +712,19 @@ public:
     friend std::istream& operator>>(std::istream& in, BigInt& bi);
     friend std::string to_string(const BigInt&);
 
-    /** Zurückkonvertierung zu einer long-Zahl,
+    /** Konvertierung zurück zu einer long-Zahl,
      * @throws pbma_exception, wenn Zahlbereich überschritten
      * @return Zahl als long mit gleichem Wert
      */
     long to_long() const;
 
-    /** Zurückkonvertierung zu einer long long-Zahl,
+    /** Konvertierung zurück zu einer long long-Zahl,
      * @throws pbma_exception, wenn Zahlbereich überschritten
      * @return Zahl als long long mit gleichem Wert
      */
     long long to_long_long() const;
 
-    /** Zurückkonvertierung zu einer double Zahl mit Typkonvertierung
+    /** Konvertierung zurück zu einer double-Zahl
      * @throws pbma_exception, wenn Zahlbereich überschritten
      * @return Zahl als double mit fast gleichem Wert
      */

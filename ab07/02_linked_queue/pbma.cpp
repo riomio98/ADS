@@ -49,10 +49,10 @@ static pbma_exception error(const std::string& _cause) {
 // Worse: clangd complains bitterly about using a nonliteral as first argument
 // in both uses of snprintf. This is wrong in the first use and no problem
 // in the second use, as this is intended. However, the warning
-// "-Wformat-nonliteral" is default-enabled in automated cland environments
+// "-Wformat-nonliteral" is default-enabled in automated clangd environments
 // (which we might be forced to use someday). Thus, we use rather a horribly and
-// ugly trick to inhibt the usage of snprintf to the compiler in order to
-// inhibit the warning and to not confuse unexpecting students.
+// ugly trick to inhibit the usage of snprintf to the compiler in order to
+// inhibit the warning and to not confuse students.
 extern "C" {
 typedef int (*snprintf_t)(char* str, size_t size, const char* format, ...);
 snprintf_t my_secret_snprintf = snprintf;
@@ -60,7 +60,7 @@ snprintf_t my_secret_snprintf = snprintf;
 template <typename... Args>
 static string eformat(const std::string& fmt, Args... args) {
     const char* cfmt = fmt.c_str();
-    // +1 to accomodate extra space for '\0'
+    // +1 to accommodate extra space for '\0'
     const size_t size =
         static_cast<size_t>(my_secret_snprintf(nullptr, 0, cfmt, args...) + 1);
     const auto buf = make_unique<char[]>(size);
@@ -1278,7 +1278,7 @@ BigInt::BigInt(const std::string& sdigits) {
 
 ostream& operator<<(ostream& out, const BigInt& bi) {
     if (bi.sign == -1) {
-        out << ("-" + bi.digits); // to ensure that a preceeding setw works
+        out << ("-" + bi.digits); // to ensure that a preceding setw works
     } else {
         out << bi.digits;
     }
@@ -1621,7 +1621,7 @@ int fit_it(const vector<string>& multiples, const string& working) {
 
 // d1 is definitely larger than d2, result will be >= 1
 static inline string divide(const string& d1, const string& d2, int sign) {
-    vector<string> multiples; // a table of mutiples of d2
+    vector<string> multiples; // a table of multiples of d2
     for (int i = 0; i < 10; ++i) {
         multiples.push_back(mult(d2, static_cast<char>(i + '0'), 0));
     } // ex: if d2 == 12 then  multiples[3] == 36

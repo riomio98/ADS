@@ -55,6 +55,9 @@ zeilen_t umbruch_zeilen_rek(const text_t& text, int start, int b)
     return rest;
 }
 
+
+
+
 void umbruch_endrek(const text_t& text, int start, int b, zeilen_t& zeilen) {
     if(start >= text.size())
     {
